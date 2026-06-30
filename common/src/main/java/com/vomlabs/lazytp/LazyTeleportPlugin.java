@@ -2,6 +2,8 @@ package com.vomlabs.lazytp;
 
 import com.vomlabs.lazytp.config.MessageConfig;
 import com.vomlabs.lazytp.config.PluginConfig;
+import com.vomlabs.lazytp.gui.ChatPrompt;
+import com.vomlabs.lazytp.gui.GUIListener;
 import com.vomlabs.lazytp.hook.PlaceholderAPIHook;
 import com.vomlabs.lazytp.hook.VaultHook;
 import com.vomlabs.lazytp.listener.TeleportListener;
@@ -40,6 +42,7 @@ public class LazyTeleportPlugin {
 
     private VaultHook vaultHook;
     private PlaceholderAPIHook papiHook;
+    private ChatPrompt chatPrompt;
 
     public LazyTeleportPlugin(JavaPlugin plugin, SchedulerAdapter scheduler) {
         this.plugin = plugin;
@@ -123,6 +126,9 @@ public class LazyTeleportPlugin {
 
     private void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new TeleportListener(teleportManager), plugin);
+        Bukkit.getPluginManager().registerEvents(new GUIListener(), plugin);
+        chatPrompt = new ChatPrompt(this);
+        Bukkit.getPluginManager().registerEvents(chatPrompt, plugin);
     }
 
     private void registerCommands() {
@@ -186,6 +192,10 @@ public class LazyTeleportPlugin {
 
     public boolean hasEconomy() {
         return vaultHook != null && vaultHook.isEnabled();
+    }
+
+    public ChatPrompt getChatPrompt() {
+        return chatPrompt;
     }
 
 }

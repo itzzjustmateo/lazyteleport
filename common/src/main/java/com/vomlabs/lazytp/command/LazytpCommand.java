@@ -2,6 +2,7 @@ package com.vomlabs.lazytp.command;
 
 import com.vomlabs.lazytp.LazyTeleportPlugin;
 import com.vomlabs.lazytp.config.PluginConfig;
+import com.vomlabs.lazytp.gui.MainMenuGUI;
 import com.vomlabs.lazytp.permission.Permissions;
 import com.vomlabs.lazytp.util.MessageUtils;
 import com.vomlabs.lazytp.util.ParticleUtils;
@@ -34,7 +35,18 @@ public class LazytpCommand extends BaseCommand implements CommandExecutor, TabCo
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
+        if (args.length == 0 || args[0].equalsIgnoreCase("gui")) {
+            if (!(sender instanceof Player player)) {
+                MessageUtils.sendMessage(sender, "<red>Only players can use the GUI!</red>");
+                return true;
+            }
+            MainMenuGUI gui = new MainMenuGUI(player, lazyTeleport);
+            gui.populate();
+            player.openInventory(gui.getInventory());
+            return true;
+        }
+
+        if (args[0].equalsIgnoreCase("help")) {
             sendHelp(sender);
             return true;
         }
@@ -132,6 +144,7 @@ public class LazytpCommand extends BaseCommand implements CommandExecutor, TabCo
             sendCommand(sender, "/lazytp reload", "Reload configuration", PRIMARY);
         }
         sendCommand(sender, "/lazytp version", "Show plugin version", DIM);
+        sendCommand(sender, "/lazytp [gui]", "Open management GUI", HIGHLIGHT);
         sendCommand(sender, "/lazytp help", "Show this help", DIM);
 
         Component footer = Component.text("╚══════════════════════════════════════╝", PRIMARY);
@@ -153,6 +166,7 @@ public class LazytpCommand extends BaseCommand implements CommandExecutor, TabCo
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 1) {
             List<String> completions = new java.util.ArrayList<>();
+            completions.add("gui");
             completions.add("help");
             completions.add("version");
             if (sender.hasPermission(Permissions.ADMIN)) {

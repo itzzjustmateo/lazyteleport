@@ -33,6 +33,10 @@ public class HomeManager {
         return home;
     }
 
+    public Collection<Home> getAll() {
+        return storage.getAll();
+    }
+
     public Collection<Home> getByOwner(UUID ownerId) {
         return storage.getByOwner(ownerId);
     }
