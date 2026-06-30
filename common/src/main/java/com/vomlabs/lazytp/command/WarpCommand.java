@@ -48,6 +48,9 @@ public class WarpCommand extends BaseCommand implements CommandExecutor, TabComp
         String warpName = args[0];
         try {
             Warp warp = warpManager.get(warpName);
+            if (!charge(player, config.getWarpCost())) {
+                return true;
+            }
             MessageUtils.sendMessage(sender, messages.getWarpTeleporting(), "name", warp.getName());
             teleportManager.teleport(player, warp.toLocation(), () -> {});
         } catch (WarpNotFoundException e) {

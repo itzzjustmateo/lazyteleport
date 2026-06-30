@@ -169,4 +169,24 @@ public class PluginConfig extends YamlFile {
         return config.getString("system.sounds.help-open", "BLOCK_NOTE_BLOCK_PLING");
     }
 
+    public boolean isEconomyEnabled() {
+        return config.getBoolean("economy.enabled", true);
+    }
+
+    public double getWarpCost() {
+        return config.getDouble("economy.costs.warp", 10.0);
+    }
+
+    public double getHomeCost() {
+        return config.getDouble("economy.costs.home", 5.0);
+    }
+
+    public double getSpawnCost() {
+        return config.getDouble("economy.costs.spawn", 0.0);
+    }
+
+    public double getLobbyCost() {
+        return config.getDouble("economy.costs.lobby", 0.0);
+    }
+
 }

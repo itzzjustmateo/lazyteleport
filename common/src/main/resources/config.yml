@@ -55,6 +55,14 @@ lobby:
     deleted: "SMOKE"
     count: 20
 
+economy:
+  enabled: true
+  costs:
+    warp: 10.0
+    home: 5.0
+    spawn: 0.0
+    lobby: 0.0
+
 system:
   sounds:
     error: "BLOCK_NOTE_BLOCK_BASS"

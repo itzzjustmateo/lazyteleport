@@ -45,6 +45,9 @@ public class HomeCommand extends BaseCommand implements CommandExecutor, TabComp
 
         try {
             Home home = homeManager.get(player.getUniqueId(), homeName);
+            if (!charge(player, config.getHomeCost())) {
+                return true;
+            }
             MessageUtils.sendMessage(sender, messages.getHomeTeleporting(), "name", home.getName());
             teleportManager.teleport(player, home.toLocation(), () -> {});
         } catch (HomeNotFoundException e) {

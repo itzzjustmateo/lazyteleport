@@ -60,4 +60,11 @@ public abstract class BaseCommand {
         return true;
     }
 
+    protected boolean charge(Player player, double cost) {
+        if (!config.isEconomyEnabled() || cost <= 0) {
+            return true;
+        }
+        return lazyTeleport.hasEconomy() && lazyTeleport.getVaultHook().charge(player, cost);
+    }
+
 }

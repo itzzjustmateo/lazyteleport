@@ -52,6 +52,10 @@ public class LobbyCommand extends BaseCommand implements CommandExecutor, TabCom
             return true;
         }
 
+        if (!charge(player, config.getLobbyCost())) {
+            return true;
+        }
+
         MessageUtils.sendMessage(sender, messages.getLobbyTeleporting());
         teleportManager.teleport(player, target, () -> {});
 

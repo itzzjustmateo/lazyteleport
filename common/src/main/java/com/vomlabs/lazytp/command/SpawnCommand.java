@@ -52,6 +52,10 @@ public class SpawnCommand extends BaseCommand implements CommandExecutor, TabCom
             return true;
         }
 
+        if (!charge(player, config.getSpawnCost())) {
+            return true;
+        }
+
         MessageUtils.sendMessage(sender, messages.getSpawnTeleporting());
         teleportManager.teleport(player, target, () -> {});
 

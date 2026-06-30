@@ -2,6 +2,8 @@ package com.vomlabs.lazytp;
 
 import com.vomlabs.lazytp.config.MessageConfig;
 import com.vomlabs.lazytp.config.PluginConfig;
+import com.vomlabs.lazytp.hook.PlaceholderAPIHook;
+import com.vomlabs.lazytp.hook.VaultHook;
 import com.vomlabs.lazytp.listener.TeleportListener;
 import com.vomlabs.lazytp.manager.HomeManager;
 import com.vomlabs.lazytp.manager.LobbyManager;
@@ -13,6 +15,7 @@ import com.vomlabs.lazytp.storage.HomeStorage;
 import com.vomlabs.lazytp.storage.LobbyStorage;
 import com.vomlabs.lazytp.storage.SpawnStorage;
 import com.vomlabs.lazytp.storage.WarpStorage;
+import com.vomlabs.lazytp.util.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,6 +38,9 @@ public class LazyTeleportPlugin {
     private LobbyManager lobbyManager;
     private TeleportManager teleportManager;
 
+    private VaultHook vaultHook;
+    private PlaceholderAPIHook papiHook;
+
     public LazyTeleportPlugin(JavaPlugin plugin, SchedulerAdapter scheduler) {
         this.plugin = plugin;
         this.scheduler = scheduler;
@@ -42,6 +48,7 @@ public class LazyTeleportPlugin {
 
     public void enable() {
         loadConfigs();
+        initHooks();
         loadStorages();
         createManagers();
         registerListeners();
@@ -157,6 +164,28 @@ public class LazyTeleportPlugin {
 
     public SchedulerAdapter getScheduler() {
         return scheduler;
+    }
+
+    private void initHooks() {
+        vaultHook = new VaultHook();
+        boolean vaultReady = vaultHook.setup();
+        plugin.getLogger().info("Vault " + (vaultReady ? "hooked" : "not available"));
+
+        boolean papiReady = Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null;
+        MessageUtils.setPapiAvailable(papiReady);
+        if (papiReady) {
+            papiHook = new PlaceholderAPIHook(this);
+            papiHook.register();
+            plugin.getLogger().info("PlaceholderAPI expansion registered");
+        }
+    }
+
+    public VaultHook getVaultHook() {
+        return vaultHook;
+    }
+
+    public boolean hasEconomy() {
+        return vaultHook != null && vaultHook.isEnabled();
     }
 
 }
