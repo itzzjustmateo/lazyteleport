@@ -41,8 +41,12 @@ public abstract class BaseCommand {
     }
 
     protected void playSuccess(Player player, String soundKey, String particleKey) {
+        playSuccess(player, soundKey, particleKey, 20);
+    }
+
+    protected void playSuccess(Player player, String soundKey, String particleKey, int particleCount) {
         SoundUtils.playSound(player, soundKey);
-        ParticleUtils.spawnParticle(player, particleKey, config.getGeneralParticleCount(), 0.1);
+        ParticleUtils.spawnParticle(player, particleKey, particleCount, 0.1);
     }
 
     protected void playError(Player player) {

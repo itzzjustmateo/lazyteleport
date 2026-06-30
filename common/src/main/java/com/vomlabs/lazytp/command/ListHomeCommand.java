@@ -24,6 +24,10 @@ public class ListHomeCommand extends BaseCommand implements CommandExecutor, Tab
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isHomesEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Homes are disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;

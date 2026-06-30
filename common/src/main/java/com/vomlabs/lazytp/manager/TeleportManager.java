@@ -10,7 +10,6 @@ import com.vomlabs.lazytp.util.ParticleUtils;
 import com.vomlabs.lazytp.util.SoundUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 import java.util.UUID;
@@ -24,7 +23,7 @@ public class TeleportManager {
     private final Map<UUID, TeleportRequest> pendingTeleports = new ConcurrentHashMap<>();
     private final Map<UUID, Long> cooldowns = new ConcurrentHashMap<>();
 
-    public TeleportManager(JavaPlugin plugin, PluginConfig config, MessageConfig messages, SchedulerAdapter scheduler) {
+    public TeleportManager(PluginConfig config, MessageConfig messages, SchedulerAdapter scheduler) {
         this.config = config;
         this.messages = messages;
         this.scheduler = scheduler;

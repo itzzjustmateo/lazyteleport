@@ -21,6 +21,10 @@ public class DelLobbyCommand extends BaseCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isLobbyEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Lobby is disabled on this server!</red>");
+            return true;
+        }
         if (!hasPermission(sender, Permissions.LOBBY_DEL)) {
             return true;
         }
@@ -29,7 +33,7 @@ public class DelLobbyCommand extends BaseCommand implements CommandExecutor {
         MessageUtils.sendMessage(sender, messages.getLobbyDeleted());
 
         if (sender instanceof Player player) {
-            playSuccess(player, config.getSoundLobbyDeleted(), config.getParticleLobbyDeleted());
+            playSuccess(player, config.getSoundLobbyDeleted(), config.getParticleLobbyDeleted(), config.getLobbyParticleCount());
         }
 
         return true;

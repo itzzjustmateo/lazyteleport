@@ -23,6 +23,10 @@ public class ListWarpCommand extends BaseCommand implements CommandExecutor, Tab
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isWarpsEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Warps are disabled on this server!</red>");
+            return true;
+        }
         if (!hasPermission(sender, Permissions.WARP_LIST)) {
             return true;
         }

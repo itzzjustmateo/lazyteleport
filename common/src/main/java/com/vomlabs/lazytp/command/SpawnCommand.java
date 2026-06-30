@@ -29,6 +29,10 @@ public class SpawnCommand extends BaseCommand implements CommandExecutor, TabCom
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isSpawnEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Spawn is disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -36,7 +40,7 @@ public class SpawnCommand extends BaseCommand implements CommandExecutor, TabCom
         if (!hasPermission(sender, Permissions.SPAWN_USE)) {
             return true;
         }
-        if (!spawnManager.isSet()) {
+        if (spawnManager == null || !spawnManager.isSet()) {
             MessageUtils.sendMessage(sender, messages.getSpawnNotSet());
             return true;
         }

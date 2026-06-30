@@ -25,6 +25,10 @@ public class DelHomeCommand extends BaseCommand implements CommandExecutor, TabC
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isHomesEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Homes are disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -42,7 +46,7 @@ public class DelHomeCommand extends BaseCommand implements CommandExecutor, TabC
         try {
             homeManager.delete(player.getUniqueId(), homeName);
             MessageUtils.sendMessage(sender, messages.getHomeDeleted(), "name", homeName);
-            playSuccess(player, config.getSoundHomeDeleted(), config.getParticleHomeDeleted());
+            playSuccess(player, config.getSoundHomeDeleted(), config.getParticleHomeDeleted(), config.getHomeParticleCount());
         } catch (HomeNotFoundException e) {
             MessageUtils.sendMessage(sender, messages.getHomeNotFound(), "name", homeName);
             playError(player);
@@ -53,7 +57,7 @@ public class DelHomeCommand extends BaseCommand implements CommandExecutor, TabC
 
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (args.length == 1 && sender instanceof Player player && sender.hasPermission(Permissions.HOME_DEL)) {
+        if (args.length == 1 && sender instanceof Player player && sender.hasPermission(Permissions.HOME_DEL) && config.isHomesEnabled() && homeManager != null) {
             return homeManager.getNamesByOwner(player.getUniqueId()).stream()
                     .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
                     .toList();

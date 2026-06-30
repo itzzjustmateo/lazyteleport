@@ -25,6 +25,10 @@ public class SetWarpCommand extends BaseCommand implements CommandExecutor, TabC
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isWarpsEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Warps are disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -42,7 +46,7 @@ public class SetWarpCommand extends BaseCommand implements CommandExecutor, TabC
         try {
             warpManager.create(name, player.getLocation());
             MessageUtils.sendMessage(sender, messages.getWarpCreated(), "name", name);
-            playSuccess(player, config.getSoundWarpCreated(), config.getParticleWarpCreated());
+            playSuccess(player, config.getSoundWarpCreated(), config.getParticleWarpCreated(), config.getWarpParticleCount());
         } catch (InvalidNameException e) {
             if (e.getMessage().contains("already exists")) {
                 MessageUtils.sendMessage(sender, messages.getWarpAlreadyExists(), "name", name);

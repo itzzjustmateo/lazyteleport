@@ -57,10 +57,18 @@ public class LazyTeleportPlugin {
     public void reload() {
         pluginConfig.load();
         messageConfig.load();
-        warpStorage.load();
-        homeStorage.load();
-        spawnStorage.load();
-        lobbyStorage.load();
+        if (pluginConfig.isWarpsEnabled()) {
+            warpStorage.load();
+        }
+        if (pluginConfig.isHomesEnabled()) {
+            homeStorage.load();
+        }
+        if (pluginConfig.isSpawnEnabled()) {
+            spawnStorage.load();
+        }
+        if (pluginConfig.isLobbyEnabled()) {
+            lobbyStorage.load();
+        }
     }
 
     private void loadConfigs() {
@@ -72,25 +80,38 @@ public class LazyTeleportPlugin {
     }
 
     private void loadStorages() {
-        warpStorage = new WarpStorage(plugin);
-        warpStorage.load();
-
-        homeStorage = new HomeStorage(plugin);
-        homeStorage.load();
-
-        spawnStorage = new SpawnStorage(plugin);
-        spawnStorage.load();
-
-        lobbyStorage = new LobbyStorage(plugin);
-        lobbyStorage.load();
+        if (pluginConfig.isWarpsEnabled()) {
+            warpStorage = new WarpStorage(plugin);
+            warpStorage.load();
+        }
+        if (pluginConfig.isHomesEnabled()) {
+            homeStorage = new HomeStorage(plugin);
+            homeStorage.load();
+        }
+        if (pluginConfig.isSpawnEnabled()) {
+            spawnStorage = new SpawnStorage(plugin);
+            spawnStorage.load();
+        }
+        if (pluginConfig.isLobbyEnabled()) {
+            lobbyStorage = new LobbyStorage(plugin);
+            lobbyStorage.load();
+        }
     }
 
     private void createManagers() {
-        teleportManager = new TeleportManager(plugin, pluginConfig, messageConfig, scheduler);
-        warpManager = new WarpManager(warpStorage);
-        homeManager = new HomeManager(homeStorage, pluginConfig);
-        spawnManager = new SpawnManager(spawnStorage);
-        lobbyManager = new LobbyManager(lobbyStorage);
+        teleportManager = new TeleportManager(pluginConfig, messageConfig, scheduler);
+        if (pluginConfig.isWarpsEnabled() && warpStorage != null) {
+            warpManager = new WarpManager(warpStorage);
+        }
+        if (pluginConfig.isHomesEnabled() && homeStorage != null) {
+            homeManager = new HomeManager(homeStorage, pluginConfig);
+        }
+        if (pluginConfig.isSpawnEnabled() && spawnStorage != null) {
+            spawnManager = new SpawnManager(spawnStorage);
+        }
+        if (pluginConfig.isLobbyEnabled() && lobbyStorage != null) {
+            lobbyManager = new LobbyManager(lobbyStorage);
+        }
     }
 
     private void registerListeners() {

@@ -74,55 +74,55 @@ public class LazytpCommand extends BaseCommand implements CommandExecutor, TabCo
         sender.sendMessage(header);
         sender.sendMessage(title);
 
-        if (sender.hasPermission(Permissions.WARP_USE)) {
+        if (config.isWarpsEnabled() && sender.hasPermission(Permissions.WARP_USE)) {
             sendCommand(sender, "/warp <name>", "Teleport to a warp", PRIMARY);
         }
-        if (sender.hasPermission(Permissions.WARP_SET)) {
+        if (config.isWarpsEnabled() && sender.hasPermission(Permissions.WARP_SET)) {
             sendCommand(sender, "/setwarp <name>", "Create a warp", PRIMARY);
         }
-        if (sender.hasPermission(Permissions.WARP_DEL)) {
+        if (config.isWarpsEnabled() && sender.hasPermission(Permissions.WARP_DEL)) {
             sendCommand(sender, "/delwarp <name>", "Delete a warp", PRIMARY);
         }
-        if (sender.hasPermission(Permissions.WARP_LIST)) {
+        if (config.isWarpsEnabled() && sender.hasPermission(Permissions.WARP_LIST)) {
             sendCommand(sender, "/listwarp", "List all warps", PRIMARY);
         }
 
         sender.sendMessage(separator);
 
-        if (sender.hasPermission(Permissions.HOME_USE)) {
+        if (config.isHomesEnabled() && sender.hasPermission(Permissions.HOME_USE)) {
             sendCommand(sender, "/home [name]", "Teleport to your home", HIGHLIGHT);
         }
-        if (sender.hasPermission(Permissions.HOME_SET)) {
+        if (config.isHomesEnabled() && sender.hasPermission(Permissions.HOME_SET)) {
             sendCommand(sender, "/sethome [name]", "Set your home", HIGHLIGHT);
         }
-        if (sender.hasPermission(Permissions.HOME_DEL)) {
+        if (config.isHomesEnabled() && sender.hasPermission(Permissions.HOME_DEL)) {
             sendCommand(sender, "/delhome <name>", "Delete a home", HIGHLIGHT);
         }
-        if (sender.hasPermission(Permissions.HOME_LIST)) {
+        if (config.isHomesEnabled() && sender.hasPermission(Permissions.HOME_LIST)) {
             sendCommand(sender, "/listhome", "List your homes", HIGHLIGHT);
         }
 
         sender.sendMessage(separator);
 
-        if (sender.hasPermission(Permissions.SPAWN_USE)) {
+        if (config.isSpawnEnabled() && sender.hasPermission(Permissions.SPAWN_USE)) {
             sendCommand(sender, "/spawn", "Teleport to spawn", SECONDARY);
         }
-        if (sender.hasPermission(Permissions.SPAWN_SET)) {
+        if (config.isSpawnEnabled() && sender.hasPermission(Permissions.SPAWN_SET)) {
             sendCommand(sender, "/setspawn", "Set the spawn", SECONDARY);
         }
-        if (sender.hasPermission(Permissions.SPAWN_DEL)) {
+        if (config.isSpawnEnabled() && sender.hasPermission(Permissions.SPAWN_DEL)) {
             sendCommand(sender, "/delspawn", "Delete spawn", SECONDARY);
         }
 
         sender.sendMessage(separator);
 
-        if (sender.hasPermission(Permissions.LOBBY_USE)) {
+        if (config.isLobbyEnabled() && sender.hasPermission(Permissions.LOBBY_USE)) {
             sendCommand(sender, "/lobby", "Teleport to lobby", SECONDARY);
         }
-        if (sender.hasPermission(Permissions.LOBBY_SET)) {
+        if (config.isLobbyEnabled() && sender.hasPermission(Permissions.LOBBY_SET)) {
             sendCommand(sender, "/setlobby", "Set the lobby", SECONDARY);
         }
-        if (sender.hasPermission(Permissions.LOBBY_DEL)) {
+        if (config.isLobbyEnabled() && sender.hasPermission(Permissions.LOBBY_DEL)) {
             sendCommand(sender, "/dellobby", "Delete lobby", SECONDARY);
         }
 

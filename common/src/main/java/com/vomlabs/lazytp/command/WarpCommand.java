@@ -29,6 +29,10 @@ public class WarpCommand extends BaseCommand implements CommandExecutor, TabComp
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isWarpsEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Warps are disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -55,7 +59,7 @@ public class WarpCommand extends BaseCommand implements CommandExecutor, TabComp
 
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (args.length == 1 && sender.hasPermission(Permissions.WARP_USE)) {
+        if (args.length == 1 && sender.hasPermission(Permissions.WARP_USE) && config.isWarpsEnabled() && warpManager != null) {
             return warpManager.getNames().stream()
                     .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
                     .toList();

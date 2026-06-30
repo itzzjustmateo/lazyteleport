@@ -1,37 +1,61 @@
-teleport-delay: 3
-teleport-cooldown: 10
-cancel-on-movement: true
-default-home-limit: 5
+teleportation:
+  delay: 3
+  cooldown: 10
+  cancel-on-movement: true
+  effects:
+    sound-start: "ENTITY_ENDERMAN_TELEPORT"
+    sound-success: "ENTITY_ENDERMAN_TELEPORT"
+    sound-cancel: "BLOCK_NOTE_BLOCK_BASS"
+    particle: "PORTAL"
+    particle-speed: 0.1
+    particle-count: 30
 
-sounds:
-  teleport-start: "ENTITY_ENDERMAN_TELEPORT"
-  teleport-cancel: "BLOCK_NOTE_BLOCK_BASS"
-  teleport-success: "ENTITY_ENDERMAN_TELEPORT"
-  warp-created: "BLOCK_NOTE_BLOCK_PLING"
-  warp-deleted: "BLOCK_NOTE_BLOCK_BASS"
-  warp-teleport: "ENTITY_ENDERMAN_TELEPORT"
-  home-created: "BLOCK_NOTE_BLOCK_PLING"
-  home-deleted: "BLOCK_NOTE_BLOCK_BASS"
-  home-teleport: "ENTITY_ENDERMAN_TELEPORT"
-  spawn-set: "BLOCK_NOTE_BLOCK_PLING"
-  spawn-deleted: "BLOCK_NOTE_BLOCK_BASS"
-  spawn-teleport: "ENTITY_ENDERMAN_TELEPORT"
-  lobby-set: "BLOCK_NOTE_BLOCK_PLING"
-  lobby-deleted: "BLOCK_NOTE_BLOCK_BASS"
-  lobby-teleport: "ENTITY_ENDERMAN_TELEPORT"
-  error: "BLOCK_NOTE_BLOCK_BASS"
-  help-open: "BLOCK_NOTE_BLOCK_PLING"
+homes:
+  enabled: true
+  default-limit: 5
+  sounds:
+    created: "BLOCK_NOTE_BLOCK_PLING"
+    deleted: "BLOCK_NOTE_BLOCK_BASS"
+    teleport: "ENTITY_ENDERMAN_TELEPORT"
+  particles:
+    created: "VILLAGER_HAPPY"
+    deleted: "SMOKE"
+    count: 20
 
-particles:
-  teleport: "PORTAL"
-  teleport-speed: 0.1
-  teleport-count: 30
-  warp-created: "VILLAGER_HAPPY"
-  warp-deleted: "SMOKE"
-  home-created: "VILLAGER_HAPPY"
-  home-deleted: "SMOKE"
-  spawn-set: "VILLAGER_HAPPY"
-  spawn-deleted: "SMOKE"
-  lobby-set: "VILLAGER_HAPPY"
-  lobby-deleted: "SMOKE"
-  particle-count: 20
+warps:
+  enabled: true
+  sounds:
+    created: "BLOCK_NOTE_BLOCK_PLING"
+    deleted: "BLOCK_NOTE_BLOCK_BASS"
+    teleport: "ENTITY_ENDERMAN_TELEPORT"
+  particles:
+    created: "VILLAGER_HAPPY"
+    deleted: "SMOKE"
+    count: 20
+
+spawn:
+  enabled: true
+  sounds:
+    set: "BLOCK_NOTE_BLOCK_PLING"
+    deleted: "BLOCK_NOTE_BLOCK_BASS"
+    teleport: "ENTITY_ENDERMAN_TELEPORT"
+  particles:
+    set: "VILLAGER_HAPPY"
+    deleted: "SMOKE"
+    count: 20
+
+lobby:
+  enabled: true
+  sounds:
+    set: "BLOCK_NOTE_BLOCK_PLING"
+    deleted: "BLOCK_NOTE_BLOCK_BASS"
+    teleport: "ENTITY_ENDERMAN_TELEPORT"
+  particles:
+    set: "VILLAGER_HAPPY"
+    deleted: "SMOKE"
+    count: 20
+
+system:
+  sounds:
+    error: "BLOCK_NOTE_BLOCK_BASS"
+    help-open: "BLOCK_NOTE_BLOCK_PLING"

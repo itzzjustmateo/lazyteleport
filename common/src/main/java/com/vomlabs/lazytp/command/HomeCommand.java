@@ -29,6 +29,10 @@ public class HomeCommand extends BaseCommand implements CommandExecutor, TabComp
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isHomesEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Homes are disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -52,7 +56,7 @@ public class HomeCommand extends BaseCommand implements CommandExecutor, TabComp
 
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (args.length == 1 && sender instanceof Player player && sender.hasPermission(Permissions.HOME_USE)) {
+        if (args.length == 1 && sender instanceof Player player && sender.hasPermission(Permissions.HOME_USE) && config.isHomesEnabled() && homeManager != null) {
             return homeManager.getNamesByOwner(player.getUniqueId()).stream()
                     .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
                     .toList();

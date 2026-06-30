@@ -29,6 +29,10 @@ public class LobbyCommand extends BaseCommand implements CommandExecutor, TabCom
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isLobbyEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Lobby is disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -36,7 +40,7 @@ public class LobbyCommand extends BaseCommand implements CommandExecutor, TabCom
         if (!hasPermission(sender, Permissions.LOBBY_USE)) {
             return true;
         }
-        if (!lobbyManager.isSet()) {
+        if (lobbyManager == null || !lobbyManager.isSet()) {
             MessageUtils.sendMessage(sender, messages.getLobbyNotSet());
             return true;
         }

@@ -21,6 +21,10 @@ public class SetLobbyCommand extends BaseCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isLobbyEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Lobby is disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -31,7 +35,7 @@ public class SetLobbyCommand extends BaseCommand implements CommandExecutor {
 
         lobbyManager.set(player.getLocation());
         MessageUtils.sendMessage(sender, messages.getLobbySet());
-        playSuccess(player, config.getSoundLobbySet(), config.getParticleLobbySet());
+        playSuccess(player, config.getSoundLobbySet(), config.getParticleLobbySet(), config.getLobbyParticleCount());
 
         return true;
     }

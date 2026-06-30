@@ -25,6 +25,10 @@ public class SetHomeCommand extends BaseCommand implements CommandExecutor, TabC
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isHomesEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Homes are disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -38,7 +42,7 @@ public class SetHomeCommand extends BaseCommand implements CommandExecutor, TabC
         try {
             homeManager.create(player, homeName, player.getLocation());
             MessageUtils.sendMessage(sender, messages.getHomeCreated(), "name", homeName);
-            playSuccess(player, config.getSoundHomeCreated(), config.getParticleHomeCreated());
+            playSuccess(player, config.getSoundHomeCreated(), config.getParticleHomeCreated(), config.getHomeParticleCount());
         } catch (InvalidNameException e) {
             if (e.getMessage().contains("already exists")) {
                 MessageUtils.sendMessage(sender, messages.getHomeAlreadyExists(), "name", homeName);

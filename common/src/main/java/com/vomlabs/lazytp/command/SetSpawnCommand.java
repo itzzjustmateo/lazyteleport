@@ -21,6 +21,10 @@ public class SetSpawnCommand extends BaseCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!config.isSpawnEnabled()) {
+            MessageUtils.sendMessage(sender, "<red>Spawn is disabled on this server!</red>");
+            return true;
+        }
         Player player = requirePlayer(sender);
         if (player == null) {
             return true;
@@ -31,7 +35,7 @@ public class SetSpawnCommand extends BaseCommand implements CommandExecutor {
 
         spawnManager.set(player.getLocation());
         MessageUtils.sendMessage(sender, messages.getSpawnSet());
-        playSuccess(player, config.getSoundSpawnSet(), config.getParticleSpawnSet());
+        playSuccess(player, config.getSoundSpawnSet(), config.getParticleSpawnSet(), config.getSpawnParticleCount());
 
         return true;
     }
