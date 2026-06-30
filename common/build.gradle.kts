@@ -10,3 +10,7 @@ dependencies {
         exclude("org.bukkit", "bukkit")
     }
 }
+
+tasks.jar {
+    enabled = false
+}
