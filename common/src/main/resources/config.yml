@@ -1,0 +1,37 @@
+teleport-delay: 3
+teleport-cooldown: 10
+cancel-on-movement: true
+default-home-limit: 5
+
+sounds:
+  teleport-start: "ENTITY_ENDERMAN_TELEPORT"
+  teleport-cancel: "BLOCK_NOTE_BLOCK_BASS"
+  teleport-success: "ENTITY_ENDERMAN_TELEPORT"
+  warp-created: "BLOCK_NOTE_BLOCK_PLING"
+  warp-deleted: "BLOCK_NOTE_BLOCK_BASS"
+  warp-teleport: "ENTITY_ENDERMAN_TELEPORT"
+  home-created: "BLOCK_NOTE_BLOCK_PLING"
+  home-deleted: "BLOCK_NOTE_BLOCK_BASS"
+  home-teleport: "ENTITY_ENDERMAN_TELEPORT"
+  spawn-set: "BLOCK_NOTE_BLOCK_PLING"
+  spawn-deleted: "BLOCK_NOTE_BLOCK_BASS"
+  spawn-teleport: "ENTITY_ENDERMAN_TELEPORT"
+  lobby-set: "BLOCK_NOTE_BLOCK_PLING"
+  lobby-deleted: "BLOCK_NOTE_BLOCK_BASS"
+  lobby-teleport: "ENTITY_ENDERMAN_TELEPORT"
+  error: "BLOCK_NOTE_BLOCK_BASS"
+  help-open: "BLOCK_NOTE_BLOCK_PLING"
+
+particles:
+  teleport: "PORTAL"
+  teleport-speed: 0.1
+  teleport-count: 30
+  warp-created: "VILLAGER_HAPPY"
+  warp-deleted: "SMOKE"
+  home-created: "VILLAGER_HAPPY"
+  home-deleted: "SMOKE"
+  spawn-set: "VILLAGER_HAPPY"
+  spawn-deleted: "SMOKE"
+  lobby-set: "VILLAGER_HAPPY"
+  lobby-deleted: "SMOKE"
+  particle-count: 20

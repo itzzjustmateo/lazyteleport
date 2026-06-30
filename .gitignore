@@ -1,0 +1,13 @@
+.gradle/
+build/
+target/
+*.class
+*.jar
+*.log
+*.iml
+.idea/
+.vscode/
+*.swp
+*.swo
+out/
+run/

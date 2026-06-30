@@ -1,0 +1,53 @@
+prefix: "<gradient:gold:yellow>LazyTeleport</gradient> <gray>»</gray>"
+
+warp:
+  created: "<green>Warp <name> created!</green>"
+  deleted: "<green>Warp <name> deleted!</green>"
+  not-found: "<red>Warp <name> not found!</red>"
+  teleporting: "<yellow>Teleporting to warp <name>...</yellow>"
+  list-header: "<gold>Warps:</gold>"
+  list-format: "  <gray>-</gray> <white><name></white>"
+  no-warps: "<red>No warps have been set!</red>"
+  usage: "<red>Usage: /warp <name></red>"
+  already-exists: "<red>Warp <name> already exists!</red>"
+  name-required: "<red>Usage: /setwarp <name></red>"
+  del-usage: "<red>Usage: /delwarp <name></red>"
+
+home:
+  created: "<green>Home <name> created!</green>"
+  deleted: "<green>Home <name> deleted!</green>"
+  not-found: "<red>Home <name> not found!</red>"
+  teleporting: "<yellow>Teleporting to home <name>...</yellow>"
+  list-header: "<gold>Your Homes:</gold>"
+  list-format: "  <gray>-</gray> <white><name></white>"
+  no-homes: "<red>You have no homes set!</red>"
+  usage: "<red>Usage: /home [name]</red>"
+  set-usage: "<red>Usage: /sethome [name]</red>"
+  del-usage: "<red>Usage: /delhome <name></red>"
+  limit-reached: "<red>You have reached the maximum number of homes!</red>"
+  already-exists: "<red>Home <name> already exists!</red>"
+
+spawn:
+  teleporting: "<yellow>Teleporting to spawn...</yellow>"
+  set: "<green>Spawn location set!</green>"
+  deleted: "<green>Spawn location deleted!</green>"
+  not-set: "<red>Spawn location has not been set!</red>"
+
+lobby:
+  teleporting: "<yellow>Teleporting to lobby...</yellow>"
+  set: "<green>Lobby location set!</green>"
+  deleted: "<green>Lobby location deleted!</green>"
+  not-set: "<red>Lobby location has not been set!</red>"
+
+teleport:
+  cancelled: "<red>Teleport cancelled!</red>"
+  cooldown: "<red>Please wait <seconds> seconds before teleporting again.</red>"
+  countdown: "<yellow>Teleporting in <seconds> seconds... Do not move!</yellow>"
+  success: "<green>Teleported successfully!</green>"
+  failed: "<red>Teleport failed!</red>"
+
+general:
+  world-not-found: "<red>World not found!</red>"
+  player-only: "<red>This command can only be used by players!</red>"
+  no-permission: "<red>You do not have permission to use this command!</red>"
+  invalid-name: "<red>Invalid name! Use only letters, numbers, and underscores.</red>"
