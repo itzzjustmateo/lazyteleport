@@ -6,6 +6,10 @@ plugins {
 group = "com.vomlabs.lazytp"
 version = "1.0.0"
 
+tasks.jar {
+    enabled = false
+}
+
 subprojects {
     apply(plugin = "java")
     apply(plugin = "java-library")
