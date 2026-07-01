@@ -5,4 +5,6 @@ dependencies {
 
 tasks.jar {
     from(project(":common").sourceSets.main.get().output)
+    archiveFileName.set("LazyTeleport-${rootProject.version}-Paper.jar")
+    destinationDirectory.set(rootProject.layout.buildDirectory)
 }
